@@ -4,17 +4,23 @@
   // Set the document's basic properties.
   set document(author: (author,), title: title)
   set page(
-    numbering: (p, t) => if p > 1 { p },
-    number-align: end,
+    margin: (bottom: 100pt),
     background: rect(width: 90%, height: 90%),
+    footer: [
+      #locate(loc => {
+        if (counter(page).at(loc).at(0) > 1) [
+          #set text(18pt)
+          #h(1fr) #sym.dash.em #counter(page).display() #sym.dash.em #h(1fr)
+        ]
+      })
+    ],
   )
    
-   
   let sans-font = "Myanmar Text"
-  // let sans-font = "Arial"
    
   // Set body font family.
   set text(font: sans-font, lang: "en", 14pt, hyphenate: false)
+  show raw: set text(font: ("Roboto Mono", "DejaVu Sans Mono"))
   show heading: set text(font: sans-font)
   set par(justify: true)
    
@@ -74,16 +80,17 @@
   }
   pagebreak()
    
-  // index
+  // Index
   // outline(depth: 3, indent: true)
   align(center, text("Index", size: 48pt, weight: 700))
   v(3em, weak: true)
   locate(loc => {
+    set text(12pt)
     let qs = query(metadata, loc)
     tablex(
-      columns: (30pt, 1fr, 30pt, 80pt, 80pt),
+      columns: (30pt, 1fr, 30pt, 70pt, 60pt),
       align: (x, y) => {
-        if (x == 0 or y == 0) {
+        if (x == 0 or y == 0 or x == 2 or x == 3) {
           center + horizon
         } else {
           left + horizon
@@ -99,7 +106,7 @@
       },
       [Sr.\ No.],
       [Program],
-      [Pg. No.],
+      [Pg.\ No.],
       [Date],
       [Signature],
       ..qs.map(q => {
@@ -107,14 +114,13 @@
           [#str(q.value.number)],
           [#q.value.description],
           [#q.location().page()],
-          [#q.value.date],
+          [#q.value.date.display("[day]/[month]/[year]")],
           [],
         )
       }).flatten(),
     )
   })
    
-  [HI]
   pagebreak()
    
    

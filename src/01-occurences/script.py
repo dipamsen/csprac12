@@ -1,9 +1,9 @@
 def count_occ(str, ch):
-    count = 0
-    for i in str:
-        if i == ch:
-            count += 1
-    return count
+  count = 0
+  for i in str:
+    if i == ch:
+      count += 1
+  return count
 
 
 val = input("Enter a string: ")
