@@ -112,7 +112,7 @@
       ..qs.map(q => {
         (
           [#str(q.value.number)],
-          [#q.value.description],
+          [#q.value.summary],
           [#q.location().page()],
           [#q.value.date.display("[day]/[month]/[year]")],
           [],
