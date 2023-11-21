@@ -22,19 +22,40 @@
   v(1em, weak: true)
 }
 
-#let program(file, title: "Program:") = {
+#let program(file, title: "Program:", breakable: true) = {
   // set text(17pt)
-  strong(title)
+  block(breakable: breakable, {
+    strong(title)
+    set par(justify: false)
+    v(1em, weak: true)
+    block(raw(
+      read(file).replace("\r\n\r\n\r\n", "\r\n\r\n"),
+      lang: file.split(".").at(-1),
+    ), stroke: 1pt, inset: 1em, width: 100%, radius: 0.3em)
+  })
+}
+
+#let output(file) = {
+  strong("Output:")
   set par(justify: false)
   v(1em, weak: true)
-  block(
-    raw(read(file), lang: file.split(".").at(-1)),
-    stroke: 1pt,
-    inset: 1em,
-    width: 100%,
-    radius: 0.3em,
-  )
-} 
+  set text(fill: blue.darken(20%))
+  let code = read(file)
+  set raw(tab-size: 5)
+  block(stroke: 1pt, inset: 1em, width: 100%, radius: 0.3em)[
+    #let chunks = code.matches(regex("\{\{(.*?)\}\}"))
+    #let pointer = 0
+    #for chunk in chunks {
+      raw(code.slice(pointer, chunk.start))
+      {
+        set text(black)
+        raw(chunk.captures.at(0))
+      }
+      pointer = chunk.end
+    }
+    #raw(code.slice(pointer)) 
+  ]
+}
 
 #phead(
   number: 1,
@@ -45,6 +66,8 @@
 
 #program("../src/01-occurences/script.py")
 
+#output("../src/01-occurences/output.txt")
+
 #phead(
   number: 2,
   description: [Write a program to compute the area of rectangle on the basis of length and
@@ -53,6 +76,8 @@
 )
 
 #program("../src/02-area/script.py")
+
+#output("../src/02-area/output.txt")
 
 #phead(
   number: 3,
@@ -67,6 +92,8 @@
 
 #program("../src/03-menu/script.py")
 
+#output("../src/03-menu/output.txt")
+
 #phead(
   number: 4,
   description: [
@@ -75,7 +102,10 @@
   ],
   date: datetime(year: 2023, month: 10, day: 27),
 )
+
 #program("../src/04-fibonacci/script.py")
+
+#output("../src/04-fibonacci/output.txt")
 
 #phead(
   number: 5,
@@ -85,8 +115,12 @@
 )
 #program("../src/05-dice/script.py")
 
+#output("../src/05-dice/output.txt")
+
 #phead(
   number: 6,
+  summary: [Write a python program to read a file named “article.txt”, count and print the
+    following:],
   description: [Write a python program to read a file named “article.txt”, count and print the
     following: 
     #set enum(numbering: "(i)")
@@ -99,7 +133,13 @@
   date: datetime(year: 2023, month: 10, day: 28),
 )
 #program("../src/06-readfile1/script.py")
-#program("../src/06-readfile1/article.txt", title: [`article.txt`])
+#program(
+  "../src/06-readfile1/article.txt",
+  title: [`article.txt`],
+  breakable: false,
+)
+
+#output("../src/06-readfile1/output.txt")
 
 #phead(
   number: 7,
@@ -111,7 +151,13 @@
 )
 
 #program("../src/07-readfile2/script.py")
-#program("../src/07-readfile2/article.txt", title: [`article.txt`])
+#program(
+  "../src/07-readfile2/article.txt",
+  title: [`article.txt`],
+  breakable: false,
+)
+
+#output("../src/07-readfile2/output.txt")
 
 #phead(
   number: 8,
@@ -120,6 +166,8 @@
 )
 #program("../src/08-readfile3/script.py")
 #program("../src/08-readfile3/article.txt", title: [`article.txt`])
+
+#output("../src/08-readfile3/output.txt")
 
 #phead(
   number: 9,
@@ -131,12 +179,20 @@
 #program("../src/09-readfile4/script.py")
 #program("../src/09-readfile4/article.txt", title: [`article.txt`])
 
+#output("../src/09-readfile4/output.txt")
+
 #phead(
   number: 10,
   description: [Remove all the lines that contain the character 'a' in a file and write it to
     another file.],
   date: datetime(year: 2023, month: 11, day: 14),
 )
+
+#program("../src/10-writefile/script.py")
+#program("../src/10-writefile/article.txt", title: [*`article.txt`*])
+#program("../src/10-writefile/output.txt", title: [*`output.txt` (Output)*])
+
+
 #phead(
   number: 11,
   description: [Create a binary file with roll number and name. Search for a given roll number
@@ -156,12 +212,16 @@
     from the user)],
 )
 
+#program("../src/13-random/script.py")
+
+#output("../src/13-random/output.txt")
+
 #phead(
   number: 14,
   description: [Write a program using python to get 10 players name and their score. Write the
-    input in a csv file. Accept a player name using python. Read the csv file to
+    input in a `csv` file. Accept a player name using python. Read the `csv` file to
     display the name and the score. If the player name is not found give an
-    appropriate message],
+    appropriate message.],
 )
 
 #phead(
@@ -213,7 +273,7 @@
       [Field],
       [Type],
       [Size],
-      [`Reg_No`],
+      `Reg_No`,
       `char`,
       [5],
       `Sname`,

@@ -1,5 +1,7 @@
 #import "@preview/tablex:0.0.6": tablex
 
+#let raw-font = ("Roboto Mono", "DejaVu Sans Mono")
+
 #let project(school: "", title: "", author: "", roll: 0, year: "", class: "", body) = {
   // Set the document's basic properties.
   set document(author: (author,), title: title)
@@ -20,7 +22,7 @@
    
   // Set body font family.
   set text(font: sans-font, lang: "en", 14pt, hyphenate: false)
-  show raw: set text(font: ("Roboto Mono", "DejaVu Sans Mono"))
+  show raw: set text(font: raw-font)
   show heading: set text(font: sans-font)
   set par(justify: true)
    

@@ -1,0 +1,28 @@
+======================
+Menu
+======================
+
+1. Check if number is Palindrome
+2. Check if number is Armstrong
+3. Exit
+Enter your choice (1-3): {{1}}
+Enter your number: {{21412}}
+Your number is a palindrome!
+======================
+Menu
+======================
+
+1. Check if number is Palindrome
+2. Check if number is Armstrong
+3. Exit
+Enter your choice (1-3): {{2}}
+Enter your number: {{1634}}
+Your number is armstrong!
+======================
+Menu
+======================
+
+1. Check if number is Palindrome
+2. Check if number is Armstrong
+3. Exit
+Enter your choice (1-3): {{3}}

@@ -1,0 +1,6 @@
+Total alphabets: 20
+Total uppercase: 3
+Total lowercase: 17
+Total digits: 10
+Total spaces: 7
+Total special characters: 9

@@ -12,8 +12,6 @@ def fibonacci(n):
 
 
 num = int(input("Enter number of terms of Fibonacci Sequence: "))
-
 vals = fibonacci(num)
-
 for val in vals:
   print(val, end="\t")

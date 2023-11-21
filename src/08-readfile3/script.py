@@ -1,8 +1,7 @@
 f = open("article.txt")
-
-while True:
+l = " "
+while l:
   l = f.readline()
-  if l == '':
-    break
   words = l.split(" ")
-  print("#".join(words))
+  print("#".join(words), end="")
+f.close()

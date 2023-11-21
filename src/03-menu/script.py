@@ -23,15 +23,15 @@ while True:
   print("1. Check if number is Palindrome")
   print("2. Check if number is Armstrong")
   print("3. Exit")
-  choice = input("Enter your choice (1-3): ")
+  choice = int(input("Enter your choice (1-3): "))
   if choice == 1:
-    num = input("Enter your number")
+    num = int(input("Enter your number: "))
     if is_palindrome(num):
       print("Your number is a palindrome!")
     else:
       print("Your number is not a palindrome!")
   elif choice == 2:
-    num = input("Enter your number")
+    num = int(input("Enter your number: "))
     if is_armstrong(num):
       print("Your number is armstrong!")
     else:

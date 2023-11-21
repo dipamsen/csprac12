@@ -1,8 +1,7 @@
 f = open("article.txt")
+l = ' '
 
-while True:
+while l:
   l = f.readline()
-  if l == '':
-    break
   if l.startswith("T"):
     print(l.strip())

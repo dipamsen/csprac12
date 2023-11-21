@@ -1,0 +1,4 @@
+Total vowels: 5
+Total consonants: 16
+Total uppercase: 6
+Total lowercase: 15
