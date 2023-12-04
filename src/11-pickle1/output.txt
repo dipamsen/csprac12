@@ -1,0 +1,19 @@
+Students Data Entry
+
+Enter name: {{Anusha}}
+Enter roll no: {{1}}
+
+Add more? (y/n) {{y}}
+Enter name: {{Dhruv}}
+Enter roll no: {{2}}
+
+Add more? (y/n) {{y}}
+Enter name: {{Ramesh}}
+Enter roll no: {{3}}
+
+Add more? (y/n) {{y}}
+Enter name: {{Shyam}}
+Enter roll no: {{4}}
+
+Add more? (y/n) {{n}}
+Successfully entered 4 entries to students.dat.

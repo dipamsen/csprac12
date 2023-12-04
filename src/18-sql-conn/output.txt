@@ -1,0 +1,29 @@
+(1) Show employees (2) Insert employee (3) Exit
+Enter your choice: (1/2/3) {{1}}
+ID      Name            Dept    Age
+========================================
+1       Sameer Sharma   Acc     39
+2       Rama Gupta      HR      43
+3       C R Menon       IT      48
+4       Sanjeev P       Res     54
+
+(1) Show employees (2) Insert employee (3) Exit
+Enter your choice: (1/2/3) {{2}}
+Name: {{Rajesh Kumar}}
+ID: {{5}}
+Dept: {{IT}}
+Age: {{42}}
+Successfully inserted employee.
+
+(1) Show employees (2) Insert employee (3) Exit
+Enter your choice: (1/2/3) {{1}}
+ID      Name            Dept    Age
+========================================
+1       Sameer Sharma   Acc     39
+2       Rama Gupta      HR      43
+3       C R Menon       IT      48
+4       Sanjeev P       Res     54
+5       Rajesh Kumar    IT      42
+
+(1) Show employees (2) Insert employee (3) Exit
+Enter your choice: (1/2/3) {{3}}

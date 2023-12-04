@@ -1,0 +1,7 @@
+Initial stack: [20, 40, 50, 60]
+Started popping...
+Got 60
+Got 50
+Got 40
+Got 20
+Underflow

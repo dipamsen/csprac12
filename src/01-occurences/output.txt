@@ -1,4 +1,3 @@
 Enter a string: {{Computer Science}}
 Enter a character: {{e}}
-
 The character occurs 3 times in the string.

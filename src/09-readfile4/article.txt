@@ -2,6 +2,5 @@ Time
 Random
 Tkinter
 Numpy
-Scipy
 Math
 Turtle

@@ -1,0 +1,14 @@
+Enter User ID: {{python67}}
+Enter Password: {{password123}}
+More entries? (y/n) {{y}}
+Enter User ID: {{patel23}}
+Enter Password: {{admin}}
+More entries? (y/n) {{y}}
+Enter User ID: {{soham}}
+Enter Password: {{@123456}}  
+More entries? (y/n) {{n}}
+
+
+
+Enter User ID: {{patel23}}
+ID: patel23      Password: admin

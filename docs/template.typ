@@ -18,7 +18,7 @@
     ],
   )
    
-  let sans-font = "Myanmar Text"
+  let sans-font = "Atkinson Hyperlegible"
    
   // Set body font family.
   set text(font: sans-font, lang: "en", 14pt, hyphenate: false)
@@ -64,7 +64,7 @@
   //  Certificate
   {
     set align(center)
-    text(font: "Old English Text MT", 72pt)[Certificate]
+    heading(text(font: "Old English Text MT", 72pt)[Certificate])
     set par(leading: 1.3em)
      
     let inp(it) = {
@@ -78,19 +78,58 @@
       supervision.]
     v(4em, weak: true)
     text(txt, size: 22pt)
-    // todo - signature fields
+    [
+      #v(5cm)
+      #set text(16pt)
+      #set align(center)
+      #set par(leading: 0.75em)
+      #let people = ("Internal Examiner", "Principal", "External Examiner")
+      #let sign(person) = par(justify: false)[#line(length: 4.5cm, stroke: 2pt)
+      Signature of\ #person]
+      #grid(
+        columns: 3, 
+        gutter: 2em,
+        ..people.map(sign)
+      )
+    ]
+  }
+  pagebreak()
+
+  // Acknowledgements
+  align(center, heading(text("Acknowledgements", size: 48pt, weight: 700)))
+  v(3em, weak: true)
+  {
+    show par: set block(below: 2em)
+    par(justify: true, leading: 1em, text(18pt, hyphenate: false)[
+      I extend my heartfelt gratitude to everyone who has
+contributed to the completion of this Project.
+
+I am sincerely grateful to our principal Mrs. Thresiamma
+Pappachan and my Computer Science teacher Mrs. Arpita Bhoi. Their unwavering support and guidance have been instrumental in its completion.
+
+Lastly, I express my sincere gratitude to my parents
+and family for their unwavering support.
+
+To all those mentioned above and many others who
+have directly or indirectly contributed, your support
+has been truly invaluable in my growth as a learner.
+
+#align(right)[
+  \- Dipam Sen
+]
+    ])
   }
   pagebreak()
    
   // Index
   // outline(depth: 3, indent: true)
-  align(center, text("Index", size: 48pt, weight: 700))
+  align(center, heading(text("Index", size: 48pt, weight: 700)))
   v(3em, weak: true)
   locate(loc => {
-    set text(12pt)
+    set text(14pt)
     let qs = query(metadata, loc)
-    tablex(
-      columns: (30pt, 1fr, 30pt, 70pt, 60pt),
+    let toc(p) = box(place(tablex(
+      columns: (30pt, 1fr, 30pt, 80pt, 70pt),
       align: (x, y) => {
         if (x == 0 or y == 0 or x == 2 or x == 3) {
           center + horizon
@@ -110,8 +149,8 @@
       [Program],
       [Pg.\ No.],
       [Date],
-      [Signature],
-      ..qs.map(q => {
+      [Sign.],
+      ..p.map(q => {
         (
           [#str(q.value.number)],
           [#q.value.summary],
@@ -120,7 +159,10 @@
           [],
         )
       }).flatten(),
-    )
+    ), dx: -5%), width: 110%)
+    toc(qs.slice(0, 10))
+    pagebreak(weak: true)
+    toc(qs.slice(10, 20))
   })
    
   pagebreak()
@@ -129,4 +171,9 @@
   // Main body.
    
   body
+
+    align(center, heading(text("Bibliography", size: 48pt, weight: 700)))
+    v(3em)
+    set text(1.5em)
+  bibliography("works.yml", full: true, title: none, style: "springer-mathphys")
 }

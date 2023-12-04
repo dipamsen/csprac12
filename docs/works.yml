@@ -1,0 +1,35 @@
+arora:
+  type: Book
+  title: Computer Science with Python — Textbook for Class XII
+  author: Sumita Arora
+  publisher: Dhanpat Rai and Co.
+  isbn: 978-81-7700-236-2
+  date: 2023-01-01
+
+py:
+  type: Web
+  title: The Python Standard Library Documentation
+  url: "https://docs.python.org/3/library/index.html"
+
+io:
+  type: Web
+  title: io — Core tools for working with streams
+  url: "https://docs.python.org/3/library/io.html"
+  parent:
+    type: Web
+    title: The Python Standard Library Documentation
+    url: "https://docs.python.org/3/library/index.html"
+
+csv:
+  type: Web
+  title: csv — CSV File Reading and Writing
+  url: "https://docs.python.org/3/library/csv.html"
+  parent:
+    type: Web
+    title: The Python Standard Library Documentation
+    url: "https://docs.python.org/3/library/index.html"
+
+mysql:
+  type: Web
+  title: MySQL 8.2 Reference
+  url: https://dev.mysql.com/doc/refman/8.2/en/

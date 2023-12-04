@@ -7,19 +7,19 @@ spchr = 0
 
 f = open("./article.txt")
 data = f.read()
-for char in data:
-  if char.isalpha():
-    alpha += 1
-  if char.isupper():
-    upper += 1
-  if char.islower():
-    lower += 1
-  if char.isdigit():
-    digit += 1
-  if char.isspace():
-    space += 1
-  if not char.isalnum() and not char.isspace():
-    spchr += 1
+for ch in data:
+    if ch.isalpha():
+        alpha += 1
+    if ch.isupper():
+        upper += 1
+    if ch.islower():
+        lower += 1
+    if ch.isdigit():
+        digit += 1
+    if ch.isspace():
+        space += 1
+    if not ch.isalnum() and not ch.isspace():
+        spchr += 1
 
 print("Total alphabets:", alpha)
 print("Total uppercase:", upper)

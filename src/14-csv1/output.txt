@@ -1,0 +1,38 @@
+Player 1
+Enter Name: {{Parth}}
+Enter Score: {{20}}
+Player 2
+Enter Name: {{Harsh}}
+Enter Score: {{23}}
+Player 3
+Enter Name: {{Parth}}
+Enter Score: {{29}}
+Player 4
+Enter Name: {{Kapil}}
+Enter Score: {{25}}
+Player 5
+Enter Name: {{Sparsh}} 
+Enter Score: {{23 }}
+Player 6
+Enter Name: {{Soham}}
+Enter Score: {{18}}
+Player 7
+Enter Name: {{Pranjal}}
+Enter Score: {{23}}
+Player 8
+Enter Name: {{Rohan}}
+Enter Score: {{16}}
+Player 9
+Enter Name: {{Dev}}
+Enter Score: {{20}}
+Player 10
+Enter Name: {{Kushal}}
+Enter Score: {{13}}
+
+
+
+
+Player Search
+Enter name: {{Pranjal}}
+Found player
+Pranjal - Score: 23

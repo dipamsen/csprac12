@@ -11,50 +11,53 @@
 #set text(18pt)
 
 #let phead(number: 0, description: [], date: datetime.today(), summary: []) = {
-  summary = if summary.children.len() > 0 { summary } else { description } 
+  summary = if summary != [] { summary } else { description } 
   pagebreak(weak: true)
   metadata(
     (number: number, description: description, date: date, summary: summary),
   )
-  align(center, text("Program " + str(number), weight: "bold", 42pt))
+  align(center, heading(text("Program " + str(number), weight: "bold", 42pt)))
   v(2em, weak: true)
   text(description)
   v(1em, weak: true)
 }
 
-#let program(file, title: "Program:", breakable: true) = {
+#let program(file, title: strong[Program:], breakable: true) = {
   // set text(17pt)
   block(breakable: breakable, {
-    strong(title)
+    (title)
     set par(justify: false)
     v(1em, weak: true)
     block(raw(
-      read(file).replace("\r\n\r\n\r\n", "\r\n\r\n"),
+      read(file), //.replace("\r\n\r\n\r\n", "\r\n\r\n"),
       lang: file.split(".").at(-1),
     ), stroke: 1pt, inset: 1em, width: 100%, radius: 0.3em)
   })
 }
 
-#let output(file) = {
-  strong("Output:")
-  set par(justify: false)
-  v(1em, weak: true)
-  set text(fill: blue.darken(20%))
-  let code = read(file)
-  set raw(tab-size: 5)
-  block(stroke: 1pt, inset: 1em, width: 100%, radius: 0.3em)[
-    #let chunks = code.matches(regex("\{\{(.*?)\}\}"))
-    #let pointer = 0
-    #for chunk in chunks {
-      raw(code.slice(pointer, chunk.start))
-      {
-        set text(black)
-        raw(chunk.captures.at(0))
+#let output(file, title: strong("Output:"), breakable: true) = {
+  block(breakable: breakable, {
+    title
+    set par(justify: false)
+    v(1em, weak: true)
+    set text(fill: blue.darken(20%))
+    let code = read(file)
+    set raw(tab-size: 5)
+    block(stroke: 1pt, inset: 1em, width: 100%, radius: 0.3em)[
+      #let chunks = code.matches(regex("\{\{(.*?)\}\}"))
+      #let pointer = 0
+      #for chunk in chunks {
+        raw(code.slice(pointer, chunk.start))
+        {
+          set text(black)
+          show: strong
+          raw(chunk.captures.at(0))
+        }
+        pointer = chunk.end
       }
-      pointer = chunk.end
-    }
-    #raw(code.slice(pointer)) 
-  ]
+      #raw(code.slice(pointer)) 
+    ]
+  })
 }
 
 #phead(
@@ -135,7 +138,7 @@
 #program("../src/06-readfile1/script.py")
 #program(
   "../src/06-readfile1/article.txt",
-  title: [`article.txt`],
+  title: strong[`article.txt`],
   breakable: false,
 )
 
@@ -153,7 +156,7 @@
 #program("../src/07-readfile2/script.py")
 #program(
   "../src/07-readfile2/article.txt",
-  title: [`article.txt`],
+  title: strong[`article.txt`],
   breakable: false,
 )
 
@@ -165,7 +168,7 @@
   date: datetime(year: 2023, month: 11, day: 12),
 )
 #program("../src/08-readfile3/script.py")
-#program("../src/08-readfile3/article.txt", title: [`article.txt`])
+#program("../src/08-readfile3/article.txt", title: strong[`article.txt`])
 
 #output("../src/08-readfile3/output.txt")
 
@@ -177,7 +180,7 @@
 )
 
 #program("../src/09-readfile4/script.py")
-#program("../src/09-readfile4/article.txt", title: [`article.txt`])
+#program("../src/09-readfile4/article.txt", title: strong[`article.txt`])
 
 #output("../src/09-readfile4/output.txt")
 
@@ -197,19 +200,36 @@
   number: 11,
   description: [Create a binary file with roll number and name. Search for a given roll number
     and display the name, if not found display appropriate message.],
+  date: datetime(year: 2023, month: 11, day: 16),
 )
+
+#program("../src/11-pickle1/entry.py", title: [*Program:* \ Data Entry])
+
+#program("../src/11-pickle1/search.py", title: [Main Code], breakable: false)
+
+#output("../src/11-pickle1/output.txt", breakable: false)
+#output("../src/11-pickle1/output2.txt", title: [])
 
 #phead(
   number: 12,
   description: [Create a binary file with the roll no. name and marks. Input a roll number and
     update the marks.],
+  date: datetime(year: 2023, month: 11, day: 17),
 )
+
+#program(
+  "../src/12-pickle2/script.py",
+  title: [*Program:* \ Data Entry #sym.dash.em _Similar to program 11_#v(0em)Main Code],
+)
+
+#output("../src/12-pickle2/output.txt")
 
 #phead(
   number: 13,
   description: [Write a program which adds any random five even numbers in a list that falls
     between the highest and lowest no. (Both highest the lowest numbers are accepted
     from the user)],
+  date: datetime(year: 2023, month: 11, day: 20),
 )
 
 #program("../src/13-random/script.py")
@@ -218,11 +238,18 @@
 
 #phead(
   number: 14,
+  summary: [Write a program using python to get 10 players name and their score and write it
+    to a CSV file. Accept a player name using python and search it in the CSV file.],
   description: [Write a program using python to get 10 players name and their score. Write the
-    input in a `csv` file. Accept a player name using python. Read the `csv` file to
+    input in a CSV file. Accept a player name using python. Read the CSV file to
     display the name and the score. If the player name is not found give an
     appropriate message.],
+  date: datetime(year: 2023, month: 11, day: 21),
 )
+
+#program("../src/14-csv1/script.py")
+
+#output("../src/14-csv1/output.txt")
 
 #phead(
   number: 15,
@@ -230,49 +257,82 @@
     for given user-id.],
 )
 
+
+#program("../src/15-csv2/script.py")
+
+#output("../src/15-csv2/output.txt")
+
 #phead(
   number: 16,
+  summary: [Write a python program using function `PUSH(Arr)`, where `Arr` is a list of
+    numbers.],
   description: [Write a python program using function `PUSH(Arr)`, where `Arr` is a list of
     numbers. From this list push all numbers divisible by 5 into a stack implemented
     by using a list. Display the stack if it has at least one element, otherwise
     display appropriate error message.],
+  date: datetime(year: 2023, month: 11, day: 21),
 )
+
+#program("../src/16-stack-push/script.py")
+
+#output("../src/16-stack-push/output.txt")
 
 #phead(
   number: 17,
+  summary: [Write a python program using function `POP(Arr)`, where `Arr` is a stack
+    implemented by a list of numbers.],
   description: [Write a python program using function `POP(Arr)`, where `Arr` is a stack
     implemented by a list of numbers. The function returns the value deleted from
     the stack.],
+  date: datetime(year: 2023, month: 11, day: 22),
 )
+
+#program("../src/17-stack-pop/script.py")
+#pagebreak(weak: true)
+
+#output("../src/17-stack-pop/output.txt")
 
 #phead(
   number: 18,
   description: [Write a python program to integrate MySQL with Python by inserting records to
     `EMP` table and displaying records.],
+  date: datetime(year: 2023, month: 11, day: 22),
 )
+
+#program("../src/18-sql-conn/script.py")
+#output("../src/18-sql-conn/output.txt")
 
 #phead(
   number: 19,
+  summary: [Create an Employee Table with the fields `Empno`, `Empname`, `Desig`, `Dept`,
+    `Age` and `Place`. Enter five records into the table.],
   description: [Create an Employee Table with the fields `Empno`, `Empname`, `Desig`, `Dept`,
     `Age` and `Place`. Enter five records into the table. 
     - Add two more records to the table.
     - Modify the table structure by adding one more field namely date of joining.
       (`doj`)
     - Check for `NULL` value in `doj` of any record.],
+  date: datetime(year: 2023, month: 11, day: 23),
 )
+
+#program("../src/19-sql-table/employee.sql", title: strong[Code and Output:])
+
+
+#include "../src/19-sql-table/output.typ"
 
 #phead(
   number: 20,
   summary: [Create Student table with following fields and enter data as given in the table
-    below.],
+    below. Then query the following.],
   description: [
     Create Student table with following fields and enter data as given in the table
     below.
-    #table(
+    #let desc = table(
       columns: 3,
-      [Field],
-      [Type],
-      [Size],
+      align: center,
+      [*Field*],
+      [*Type*],
+      [*Size*],
       `Reg_No`,
       `char`,
       [5],
@@ -290,13 +350,14 @@
       [3],
     )
      
-    #table(
+    #let vals = table(
       columns: 5,
-      [Reg_No],
-      [Sname],
-      [Age],
-      [Dept],
-      [Class],
+      align: center,
+      [*`Reg_No`*],
+      [*`Sname`*],
+      [*`Age`*],
+      [*`Dept`*],
+      [*`Class`*],
       [M1001],
       [Harish],
       [19],
@@ -318,7 +379,7 @@
       [CSE],
       [CS2],
       [E1001],
-      [Rat],
+      [Ravi],
       [20],
       [ECE],
       [EC1],
@@ -333,7 +394,9 @@
       [ECE],
       [EC2],
     )
-     
+
+    #grid(columns: 2, gutter: 1em, desc, vals)
+    #v(-1em)
     #set enum(numbering: "(i)")
      
     Then, query the following: 
@@ -342,4 +405,9 @@
     + List the students department wise. 
     + Modify the class ME2 to ME1.
   ],
+  date: datetime(year: 2023, month: 11, day: 24),
 )
+
+#program("../src/20-sql-query/main.sql", title: strong[Code and Output:])
+
+#include "../src/20-sql-query/output.typ"
